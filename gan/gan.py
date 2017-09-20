@@ -26,7 +26,7 @@ class GAN:
         self.args = args
 
         # Manage shapes and placeholders. E.g. for MNIST, O = odim = 784.
-        self.prior_dim = args.gauss_prior_size
+        self.prior_dim = args.gen_prior_size
         self.odim = data['X_train'].shape[1]
         assert len(data['X_train'].shape) == 2
 
@@ -72,26 +72,20 @@ class GAN:
 
 
     def _build_D(self, d_input_BO, reuse):
-        """ Builds the Discriminator network.
-        
-        TODO
-        """
+        """ Builds the Discriminator network using a FC network. """
         with tf.variable_scope('Discriminator', reuse=reuse):
-            self.d_Nh1 = tf.nn.relu(tf.layers.dense(d_input_BO, 500))
-            self.d_Nh2 = tf.nn.relu(tf.layers.dense(self.d_Nh1, 500))
+            self.d_Nh1 = tf.nn.relu(tf.layers.dense(d_input_BO, 1024))
+            self.d_Nh2 = tf.nn.relu(tf.layers.dense(self.d_Nh1, 512))
             self.d_result_B1 = tf.layers.dense(self.d_Nh2, 1)
             self.d_result_B = tf.reshape(self.d_result_B1, [-1])
             return self.d_result_B
 
 
     def _build_G(self, g_input_BP, outdim):
-        """ Builds the Generator network.
-        
-        TODO
-        """
+        """ Builds the Generator network using a FC network. """
         with tf.variable_scope('Generator', reuse=False):
-            self.g_Bh1 = tf.nn.relu(tf.layers.dense(g_input_BP, 500))
-            self.g_Bh2 = tf.nn.relu(tf.layers.dense(self.g_Bh1, 500))
+            self.g_Bh1 = tf.nn.relu(tf.layers.dense(g_input_BP, 256))
+            self.g_Bh2 = tf.nn.relu(tf.layers.dense(self.g_Bh1, 512))
             self.g_result_BO = tf.layers.dense(self.g_Bh2, outdim)
             return self.g_result_BO
 
@@ -103,7 +97,10 @@ class GAN:
         everywhere ... and I should probably generate a huge block of noise
         beforehand to avoid this computation during training.
         """
-        return np.random.standard_normal(size=(self.bsize,self.prior_dim))
+        if self.args.gen_prior_type == 'gaussian':
+            return np.random.standard_normal(size=(self.bsize,self.prior_dim))
+        elif self.args.gen_prior_type == 'uniform':
+            return np.random.uniform(-1.0, 1.0, size=(self.bsize,self.prior_dim))
 
 
     def train(self):
@@ -160,6 +157,10 @@ class GAN:
                 self._save_snapshot(ii, weights_v, gen_out_BDD)
 
 
+    #####################
+    # DEBUGGING METHODS #
+    #####################
+
     def _save_snapshot(self, ii, weights_v, gen_out_BDD):
         """ Save the NN weights and GAN-generated images. 
         
@@ -194,10 +195,6 @@ class GAN:
                 index += 1
         new_im.save(self.log_dir+'/visuals/gen_'+itr+'.png')
 
-
-    #####################
-    # DEBUGGING METHODS #
-    #####################
 
     def _print_summary(self):
         print("\n=== START OF SUMMARY ===\n")
