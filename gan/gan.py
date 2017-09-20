@@ -134,6 +134,8 @@ class GAN:
                 num_correct = np.sum(dout_real > 0.0) + np.sum(dout_fake < 0.0)
                 elapsed_time_hours = (time.time() - t_start) / (60.0 ** 2)
 
+                logz.log_tabular("AvgRealScore",  np.mean(dout_real))
+                logz.log_tabular("AvgFakeScore",  np.mean(dout_fake))
                 logz.log_tabular("LossDis",       loss_D)
                 logz.log_tabular("LossGen",       loss_G)
                 logz.log_tabular("DisNumCorrect", num_correct)

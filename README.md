@@ -24,3 +24,6 @@ Here's what I'd like to implement:
 - **Variational Autoencoders (VAEs)**.
 
 Optional challenge: do these *without* looking at other code online.
+
+I'll try to push substantive updates only, and not to keep pushing every trivial
+change at once.

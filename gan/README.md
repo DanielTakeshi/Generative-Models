@@ -56,11 +56,17 @@ The following visuals images are from seed 3.
 :-------------------------:|:-------------------------:
 ![](images/second/gen_30000.png)  |  ![](images/second/gen_35000.png)
 
-Here is a plot containing the results from all five seeds.
+Here is a plot containing the results from all five seeds.  
 
-Yeah I don't know why the Discriminator continues to classify things correctly.
+I don't know why the Discriminator continues to classify things correctly. At
+least the average real score has lower absolute value than the average fake
+score's absolute value (because the one-sided label smoothing should decrease
+the Discriminator's confidence on the real samples). But they really need to
+both go to zero.
 
-![](figures/gen_30000.png)
+Note that the y-axis ranges are set to be equal for certain groups of plots.
+
+![](figures/mnist.png)
 
 
 
