@@ -2,8 +2,8 @@
 
 A vanilla VAE.
 
-- Python 3.5
-- TensorFlow 1.2
+- Python 3.5.3
+- TensorFlow 1.3.0
 
 Status: I *think* it's essentially complete but I will need to double check
 everything.

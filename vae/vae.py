@@ -174,8 +174,11 @@ class VAE:
                 feed = {self.latent_BZ: latent_BZ}
                 dec_out_BO, dec_logstd_BO = \
                         self.sess.run([self.d_mean_BO, self.d_logstd_BO], feed)
-                # TODO _sample_, not just copy the mean...
-                dec_out_BDD = np.reshape(dec_out_BO, (bs,dims,dims))
+
+                # With the mean and (log) std, we can sample.
+                eps_BO = np.random.standard_normal(size=dec_out_BO.shape)
+                sampled_BO = dec_out_BO + (np.exp(dec_logstd_BO) * eps_BO)
+                dec_out_BDD = np.reshape(sampled_BO, (bs,dims,dims))
                 weights_v = self.sess.run(self.weights_v)
                 self._save_snapshot(ii, weights_v, dec_out_BDD)
 
