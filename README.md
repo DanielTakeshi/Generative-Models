@@ -12,16 +12,17 @@ directory should have its own `main.py` file which contains the command line
 arguments and/or configuration stuff. Maybe it would be useful to get a few bash
 scripts set up.
 
-Currently implemented:
+Currently implemented and "essentially" done, meaning that it's working but I
+should still double check things.
 
-- **Generative Adversarial Networks (GANs)**. Status: essentially done.
+- [**Generative Adversarial Networks (GANs)**](https://github.com/DanielTakeshi/Generative-Models/tree/master/gan).
+- [**Variational Autoencoders (VAEs)**](https://github.com/DanielTakeshi/Generative-Models/tree/master/vae).
 
 Here's what I'd like to implement:
 
 - **Conditional Generative Adversarial Networks (GANs)**.
 - **Deep Convolutional Generative Adversarial Networks (DCGANs)**.
 - **Wasserstein Generative Adversarial Networks (WGANs)**.
-- **Variational Autoencoders (VAEs)**.
 - **Conditional Variational Autoencoders (CVAEs)**.
 
 Optional challenge: do these *without* looking at other code online.
