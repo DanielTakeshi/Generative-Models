@@ -56,10 +56,10 @@ def plot_one_directory(args, dirnames, figname):
             axes[i].tick_params(axis='y', labelsize=tick_size)
             axes[i].legend(loc='best', ncol=2, prop={'size':legend_size})
 
-        axes[0].set_ylim([-10,10])
-        axes[1].set_ylim([-10,10])
-        axes[2].set_ylim([0,10])
-        axes[3].set_ylim([0,10])
+        #axes[0].set_ylim([-10,10])
+        #axes[1].set_ylim([-10,10])
+        #axes[2].set_ylim([0,10])
+        #axes[3].set_ylim([0,10])
 
     plt.tight_layout()
     plt.savefig(figname)
