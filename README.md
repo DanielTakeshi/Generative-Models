@@ -22,6 +22,7 @@ Here's what I'd like to implement:
 - **Deep Convolutional Generative Adversarial Networks (DCGANs)**.
 - **Wasserstein Generative Adversarial Networks (WGANs)**.
 - **Variational Autoencoders (VAEs)**.
+- **Conditional Variational Autoencoders (CVAEs)**.
 
 Optional challenge: do these *without* looking at other code online.
 

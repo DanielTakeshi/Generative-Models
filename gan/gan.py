@@ -40,9 +40,9 @@ class GAN:
         self.D_fake_B = self._build_D(self.G_out_BO, reuse=True) # Generator input!
 
         # Collect the weights. Naming is key to separate weight updates.
-        self.weights   = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
-        self.weights_v = tf.concat([tf.reshape(w, [-1]) for w in self.weights], axis=0)
-        self.w_shapes  = [w.get_shape().as_list() for w in self.weights]
+        self.weights     = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
+        self.weights_v   = tf.concat([tf.reshape(w, [-1]) for w in self.weights], axis=0)
+        self.w_shapes    = [w.get_shape().as_list() for w in self.weights]
         self.num_weights = np.sum([np.prod(sh) for sh in self.w_shapes])
         self.dis_weights = [v for v in self.weights if 'Discriminator' in v.name]
         self.gen_weights = [v for v in self.weights if 'Generator' in v.name]
@@ -110,8 +110,6 @@ class GAN:
         num_mbs = len(self.data_mb_list['X_train'])
 
         for ii in range(args.train_iters):
-            stats = defaultdict(list)
-
             # Sample minibatch and form feed dictionary.
             real_BO = self.data_mb_list['X_train'][ii % num_mbs]
             prior_BP = self._sample_prior()

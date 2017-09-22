@@ -36,7 +36,9 @@ I've noticed that:
   2. Blurry images
   3. Images that might be sharp and/or bright, but have lots of static
 
-  I suspect that DCGANs will help fix these.
+  I suspect that DCGANs will help fix these. **Also** ... I suspect I am still
+  using too many parameters. Fully connected networks can take up a surprising
+  amount of parameters.
 
 The following visuals images are from seed 3.
 

@@ -70,7 +70,11 @@ def list_of_minibatches(data, bsize, shuffle=True):
     X_train = data['X_train'][indices]
     y_train = data['y_train'][indices]
 
-    for i in range(0, N, bsize):
+    for i in range(0, N-bsize, bsize):
         data_lists['X_train'].append(X_train[i:i+bsize, :])
         data_lists['y_train'].append(y_train[i:i+bsize])
+
+    first = data_lists['X_train'][0].shape
+    last  = data_lists['X_train'][-1].shape
+    assert first == last, "{} vs {} w/bs {}".format(first, last, bsize)
     return data_lists
